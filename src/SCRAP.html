@@ -6,7 +6,6 @@
 <body>
 	<script>
 
-
       var x = [ ["0a","0b","0c","0d","0e"],    
                 ["1a","1b","1c","1d","1e"],
                 ["2a","2b","2c","2d","2e"],
@@ -77,8 +76,40 @@
         count > 1 && (ans = true);
         return ans;
     }
-    zzz(0);
-    // zzz(1);
+    //zzz(0);               // _.reduce(collection, function( ), accummulator)
+    // zzz(1);          
+
+    // collection.reduce( function( acc, el, i, coll ){ 
+
+    // },accumulator)
+   // [ [ 1, 2, 3 ]
+   //   [ 4, 5, 6 ] 
+   //   [ 7, 8, 9 ] ]
+
+var arr1  =    [  [ 0, 1, 0 ] ,   [ 0, 0, 1 ] , [ 1, 0, 0 ]  ]
+// innerArray = [ 1, 2, 3 ]     [ 4, 5, 6 ]   [ 7, 8, 9 ] 
+// i =                 0                 1               2
+    //var outerArray; // outer array
+    // var arr2; // inner array
+                                                                                            // arr1[ i ] === el
+    var isThereConflict = function(outerArray, horizontal_index){ // Y = y-axis, index of arr1
+      // arr1.reduce(function(accum, el, i){   // i = Y-axis
+      var count = 0;
+      var otherIndex = horizontal_index // 1
+      outerArray.forEach(function(innerArray, i ){   // i = Y-axis
+        console.log(innerArray, i, horizontal_index);
+        if((innerArray[otherIndex]) && (outerArray[i])){
+          if(innerArray[otherIndex] === 1){
+            count++;
+          }
+        }
+        otherIndex++; 
+      });
+      return count > 1 ? true : false; 
+    }
+    var answer = isThereConflict(arr1, 0);
+    console.log(answer);
+
 
 	</script>
 </body>

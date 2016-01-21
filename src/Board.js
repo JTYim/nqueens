@@ -131,11 +131,27 @@
     // Major Diagonals - go from top-left to bottom-right
     // --------------------------------------------------------------
     //
+
+  /*["0","0","1","0"],    
+    ["0","0","0","0"],
+    ["1","0","0","0"],
+    ["0","0","0","0"],*/
     // test if a specific major diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false;
+      // console.log(this.rows());
+      var count = 0;
+      var index = minorDiagonalColumnIndexAtFirstRow;
+      outerArray = this.rows();
+      outerArray.forEach(function(innerArray, i){
+        if(innerArray[index] && (outerArray[i])){
+          if(innerArray[index] === 1){
+            count++;
+          }
+        }
+        index--;
+      });
+      return count > 1 ? true : false;
     },
-
     // test if any major diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
       return false;
@@ -155,57 +171,42 @@
                 [0,0,0,1,0],
                 [1,0,0,0,0] ]  */
 
+            /*[0,0,1,0],    
+              [0,0,0,0],
+              [1,0,0,0],
+              [0,0,0,0],*/
+
 
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      console.log(this.rows());
       var count = 0;
-      var ans = false;
-      var c_Idx = majorDiagonalColumnIndexAtFirstRow  
-      matrix[0] [c_Idx] === 1 && ( count++ );
-      for(var r_Idx = c_Idx; r_Idx < this.rows().length; r_Idx++){ // loops through each row
-          matrix[ r_Idx + 1 ] [ c_Idx + 1] === 1 && (count++);
-          //console.log("matrix[r_Idx + 1][c +1]", matrix[ r_Idx + 1 ] [ c_Idx + 1]);
-      }
-
-      // for(var i = 0; i < diagLength; i++){ // loops through each column
-      //   var matrix = this.rows();
-      //   if(matrix[ r_Idx + i ] [ i ]){
-      //     matrix[ r_Idx + i ] [ i ] === 1 && (count++);
-      //   }
-        //console.log("matrix[r_Idx + i][i]", matrix[ r_Idx + i ] [ i ]);
-      // }
-
-      count > 1 && (ans = true);
-      return ans;
-      
-      /*var count = 0;
-      var ans = false;
-      for(var r_Idx = 0; r_Idx < this.rows().length; r_Idx++){
-        for(var i = 0; i < this.rows().length; i++){
-          var matrix = this.rows();
-          matrix[ r_Idx + i ] [ i ] === 1 && (count++);
+      var index = majorDiagonalColumnIndexAtFirstRow;
+      outerArray = this.rows();
+      outerArray.forEach(function(innerArray, i){
+        if(innerArray[index] && (outerArray[i])){
+          if(innerArray[index] === 1){
+            count++;
+          }
         }
-      }
-      count > 1 && (ans = true);
-      return ans;*/
+        index++;
+      });
+      return count > 1 ? true : false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      var count = 0;
-      var ans = false;
-      var diagLength = this.rows().length
-      for(var r_Idx = 0; r_Idx < this.rows().length; r_Idx++){ // loops through each row
-        for(var i = 0; i < diagLength; i++){ // loops through each column
-          var matrix = this.rows();
-          if(matrix[ r_Idx + i ] [ i ]){
-            matrix[ r_Idx + i ] [ i ] === 1 && (count++);
-          }
-          console.log("matrix[r_Idx + i][i]", matrix[ r_Idx + i ] [ i ]);
+      // console.log(this.hasMinorDiagonalConflictAt(0));
+      var check = false;
+      var outerArray = this.rows();
+      for(var x = 0; x < this.rows().length; x++){
+        for(var horizontalIndex=0; horizontalIndex<this.rows().length; horizontalIndex++){
+          check === false && ( check = hasMajorDiagonalConflictAt(horizontalIndex) )
         }
-         diagLength--;
       }
-      count > 1 && (ans = true);
-      return ans;
+      /*for(var verticalIndex=0; verticalIndex<this.rows().length; verticalIndex++){
+        check === false && ( check = hasMajorDiagonalConflictAt(outerArray[verticalIndex]) )
+      }*/
+
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
