@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title>WORKING</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+</head>
+<body>
+	<script>
+
+
+      var x = [ ["0a","0b","0c","0d","0e"],    
+                ["1a","1b","1c","1d","1e"],
+                ["2a","2b","2c","2d","2e"],
+                ["3a","3b","3c","3d","3e"],
+                ["4a","4b","4c","4d","4e"] ];
+
+
+    var func = function(minorDiagonalColumnIndexAtFirstRow) {
+      var count = 0;
+      var ans = false;
+      var z =x.length
+      for(var r_Idx = 0; r_Idx < x.length; r_Idx++){ // loops through each row
+        for(var i = 0; i < z; i++){ // loops through each column
+          var matrix = x;
+          if(matrix[ r_Idx + i ] [ i ]){
+            matrix[ r_Idx + i ] [ i ] === 1 && (count++);
+          }
+          // console.dir()
+          console.log("matrix[r_Idx + i][i]", matrix[ r_Idx + i ] [ i ]);
+        }
+         z--;
+      }
+      count > 1 && (ans = true);
+      return ans;
+    }
+    // func(x);
+
+    // var func = function(minorDiagonalColumnIndexAtFirstRow) {
+    //   var count = 0;
+    //   var ans = false;
+    //   for(var r_Idx = 0; r_Idx < x.length; r_Idx++){
+    //     for(var i = 0; i < x.length; i++){
+    //       var matrix = x;
+    //       matrix[ r_Idx + i ] [ i ] === 1 && (count++);
+    //       // console.dir()
+    //       console.log("matrix[r_Idx + i][i]", matrix[ r_Idx + i ] [ i ]);
+    //     }
+    //   }
+    //   count > 1 && (ans = true);
+    //   return ans;
+    // }
+      var zzz = function(majorDiagonalColumnIndexAtFirstRow){
+        console.log("here");
+        var count = 0;
+        var ans = false;
+        var matrix = x;
+        var c_Idx = majorDiagonalColumnIndexAtFirstRow  
+        console.log("matrix[0][c_Idx]", matrix[ 0 ] [ c_Idx]);
+        matrix[0] [c_Idx] === 1 && ( count++ );
+        c_Idx++;
+        for(var r_Idx = c_Idx; c_Idx < matrix.length - majorDiagonalColumnIndexAtFirstRow; r_Idx++,c_Idx++){ // loops through each row
+            console.log("c_Idx", c_Idx+1);
+            console.log("r_Idx", r_Idx+1);
+            if(matrix[ r_Idx + 1 ] [ c_Idx + 1]){
+              matrix[ r_Idx + 1 ] [ c_Idx + 1] === 1 && (count++);
+            }
+            console.log("matrix[r_Idx + 1][c +1]", matrix[ r_Idx + 1 ] [ c_Idx + 1]);
+        }
+
+        // for(var i = 0; i < diagLength; i++){ // loops through each column
+        //   var matrix = this.rows();
+        //   if(matrix[ r_Idx + i ] [ i ]){
+        //     matrix[ r_Idx + i ] [ i ] === 1 && (count++);
+        //   }
+          //console.log("matrix[r_Idx + i][i]", matrix[ r_Idx + i ] [ i ]);
+        // }
+
+        count > 1 && (ans = true);
+        return ans;
+    }
+    zzz(0);
+    // zzz(1);
+
+	</script>
+</body>
+</html>

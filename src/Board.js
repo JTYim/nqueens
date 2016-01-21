@@ -132,13 +132,13 @@
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+    hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
-    hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+    hasAnyMinorDiagonalConflicts: function() {
+      return false;
     },
 
 
@@ -147,13 +147,65 @@
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
-    hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+
+
+            /*[ [0,0,1,0,0],    
+                [0,0,0,0,1],
+                [0,1,0,0,0],
+                [0,0,0,1,0],
+                [1,0,0,0,0] ]  */
+
+
+    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      var count = 0;
+      var ans = false;
+      var c_Idx = majorDiagonalColumnIndexAtFirstRow  
+      matrix[0] [c_Idx] === 1 && ( count++ );
+      for(var r_Idx = c_Idx; r_Idx < this.rows().length; r_Idx++){ // loops through each row
+          matrix[ r_Idx + 1 ] [ c_Idx + 1] === 1 && (count++);
+          //console.log("matrix[r_Idx + 1][c +1]", matrix[ r_Idx + 1 ] [ c_Idx + 1]);
+      }
+
+      // for(var i = 0; i < diagLength; i++){ // loops through each column
+      //   var matrix = this.rows();
+      //   if(matrix[ r_Idx + i ] [ i ]){
+      //     matrix[ r_Idx + i ] [ i ] === 1 && (count++);
+      //   }
+        //console.log("matrix[r_Idx + i][i]", matrix[ r_Idx + i ] [ i ]);
+      // }
+
+      count > 1 && (ans = true);
+      return ans;
+      
+      /*var count = 0;
+      var ans = false;
+      for(var r_Idx = 0; r_Idx < this.rows().length; r_Idx++){
+        for(var i = 0; i < this.rows().length; i++){
+          var matrix = this.rows();
+          matrix[ r_Idx + i ] [ i ] === 1 && (count++);
+        }
+      }
+      count > 1 && (ans = true);
+      return ans;*/
     },
 
     // test if any minor diagonals on this board contain conflicts
-    hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+    hasAnyMajorDiagonalConflicts: function() {
+      var count = 0;
+      var ans = false;
+      var diagLength = this.rows().length
+      for(var r_Idx = 0; r_Idx < this.rows().length; r_Idx++){ // loops through each row
+        for(var i = 0; i < diagLength; i++){ // loops through each column
+          var matrix = this.rows();
+          if(matrix[ r_Idx + i ] [ i ]){
+            matrix[ r_Idx + i ] [ i ] === 1 && (count++);
+          }
+          console.log("matrix[r_Idx + i][i]", matrix[ r_Idx + i ] [ i ]);
+        }
+         diagLength--;
+      }
+      count > 1 && (ans = true);
+      return ans;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
